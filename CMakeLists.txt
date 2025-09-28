@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 
 project(BitVecEngine)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wno-psabi -Wno-sign-compare")
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopt-info")
 
@@ -20,6 +20,8 @@ ELSEIF (OPTIMIZATION_LEVEL STREQUAL "generic")
 ENDIF()
 
 include_directories(external/eigen)
+include_directories(/opt/miniconda3/include)
+link_directories(/opt/miniconda3/lib)
 
 add_subdirectory(bitvecengine)
 add_subdirectory(examples)
@@ -36,3 +38,8 @@ FIND_PACKAGE(OpenMP)
 IF(OPENMP_FOUND)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 ENDIF()
+
+target_link_libraries(VAQ PUBLIC armadillo glpk)
+FIND_PACKAGE(pybind11 REQUIRED)
+pybind11_add_module(pyvaq bitvecengine/VAQ_binding.cpp)
+target_link_libraries(pyvaq PRIVATE VAQ FPGrowth)

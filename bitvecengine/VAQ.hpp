@@ -26,11 +26,11 @@ extern "C" {
 
 int sgemm_ (
         const char *transa, const char *transb, 
-        FINTEGER *m, FINTEGER *n, FINTEGER *k, 
+        const FINTEGER *m, const FINTEGER *n, const FINTEGER *k,
         const float *alpha, const float *a,
-        FINTEGER *lda, const float *b,
-        FINTEGER *ldb, float *beta,
-        float *c, FINTEGER *ldc);
+        const FINTEGER *lda, const float *b,
+        const FINTEGER *ldb, const float *beta,
+        float *c, const FINTEGER *ldc);
 }
 
 class VAQ {
