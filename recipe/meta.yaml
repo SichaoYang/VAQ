@@ -1,0 +1,36 @@
+{% set version = "0.1.0" %}
+
+package:
+  name: vaq
+  version: {{ version }}
+
+source:
+  path: ..
+
+build:
+  number: 0
+  # script: bash recipe/build.sh
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - armadillo
+    - glpk
+    - pybind11
+    - python
+  run:
+    - armadillo
+    - glpk
+    - numpy
+    - python
+
+about:
+  home: https://github.com/SichaoYang/VAQ
+  license: "Apache-2.0"
+  summary: "Pybind11 extension of VAQ"
+  description: |
+    Forked from https://github.com/TheDatumOrg/VAQ.
+    Reference: J. Paparrizos, I. Edian, C. Liu, A. J. Elmore and M. J. Franklin, "Fast Adaptive Similarity Search through Variance-Aware Quantization," 2022 IEEE 38th International Conference on Data Engineering (ICDE), Kuala Lumpur, Malaysia, 2022, pp. 2969-2983, doi: 10.1109/ICDE53745.2022.00268.
